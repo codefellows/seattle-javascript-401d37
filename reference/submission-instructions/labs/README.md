@@ -45,8 +45,6 @@ Your grade is based on:
 
 ## Helpful Resources
 
-- [Configuration Files](./configs)
-  - Starter configurations/scaffold for all lab types
 - [Getting Started Guide](./getting-started.md)
 - [Node App Submission Instructions](./node-apps.md)
 - [Express Server Submission Instructions](./express-servers.md)
