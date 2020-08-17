@@ -1,0 +1,28 @@
+{
+  "name": "notesy",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "notes": "index.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "is-url": "^1.2.4",
+    "minimist": "^1.2.0",
+    "mongoose": "^5.8.11",
+    "superagent": "^5.2.1",
+    "uuid": "^3.4.0"
+  },
+  "devDependencies": {
+    "@code-fellows/supergoose": "^1.0.1",
+    "faker": "^4.1.0",
+    "jest": "^25.1.0"
+  }
+}
