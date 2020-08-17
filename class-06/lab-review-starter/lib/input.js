@@ -32,7 +32,15 @@ class Input {
   }
 
   valid() {
-    if ( this.command.action.match(/add|delete/i)  ) { return !! this.command.payload; }
+
+    if (!this.command.action) {// {}
+      return false;
+    }
+
+    if (this.command.action.match(/add|delete/i)  ) {
+      return !! this.command.payload;
+    }
+
     return !! this.command.action;
   }
 }

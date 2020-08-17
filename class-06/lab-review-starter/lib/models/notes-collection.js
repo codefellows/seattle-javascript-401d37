@@ -9,8 +9,17 @@ class NotesCollection {
     return note.save();
   }
 
-  delete() { }
-  get() { }
+  delete(id) {
+    return NotesModel.findByIdAndDelete(id);
+
+    // TODO: render the text below in index.js
+    //     .then(() => console.log('Deleted Note', id));
+    //   return;
+  }
+
+  get(query) {
+    return NotesModel.find(query);
+  }
 
 }
 

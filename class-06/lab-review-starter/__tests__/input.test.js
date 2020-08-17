@@ -6,12 +6,12 @@ const minimist = require('minimist');
 minimist.mockImplementation(() => {
   return {
     a: 'This is a note',
-  }
+  };
 });
 
 const Input = require('../lib/input.js');
 
-describe.skip('Input Module', () => {
+describe('Input Module', () => {
 
   it('parse() creates a good object', () => {
     let options = new Input();
@@ -29,6 +29,18 @@ describe.skip('Input Module', () => {
     let options = new Input();
     options.command = {}; // break it
     expect(options.valid()).toBeFalsy();
+  });
+
+  it('valid() handles list', () => {
+    let options = new Input();
+    options.command = {
+      action: 'list',
+      payload: undefined,
+      category: undefined,
+    };
+
+    expect(options.valid() == true);
+
   });
 
 });

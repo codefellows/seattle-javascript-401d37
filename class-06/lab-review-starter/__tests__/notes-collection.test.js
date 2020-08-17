@@ -4,7 +4,7 @@ require('@code-fellows/supergoose');
 
 const NotesCollection = require('../lib/models/notes-collection.js');
 
-describe('Notes Collection', () => {
+describe.skip('Notes Collection', () => {
 
   it('should create - sunny day', async () => {
 
