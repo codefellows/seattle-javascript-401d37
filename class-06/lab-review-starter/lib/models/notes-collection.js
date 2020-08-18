@@ -9,12 +9,13 @@ class NotesCollection {
     return note.save();
   }
 
-  delete(id) {
-    return NotesModel.findByIdAndDelete(id);
+  async delete(id) {
 
-    // TODO: render the text below in index.js
-    //     .then(() => console.log('Deleted Note', id));
-    //   return;
+    try {
+      return await NotesModel.findByIdAndDelete(id);
+    } catch (err) {
+      return Promise.resolve(false);
+    }
   }
 
   get(query) {

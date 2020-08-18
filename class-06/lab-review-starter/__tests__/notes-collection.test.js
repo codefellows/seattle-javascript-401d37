@@ -4,7 +4,7 @@ require('@code-fellows/supergoose');
 
 const NotesCollection = require('../lib/models/notes-collection.js');
 
-describe.skip('Notes Collection', () => {
+describe('Notes Collection', () => {
 
   it('should create - sunny day', async () => {
 
@@ -17,6 +17,46 @@ describe.skip('Notes Collection', () => {
     expect(note._id).toBeDefined();
 
     compareProps(noteData, note);
+
+  });
+
+  it('should create with no category given', async () => {
+    const notesCollection = new NotesCollection();
+
+    const noteData = { text: 'Generic note' };
+
+    const note = await notesCollection.create(noteData);
+
+    expect(note._id).toBeDefined();
+
+    compareProps(noteData, note);
+
+    expect(note.category).toBe('general');
+  });
+
+  it('should delete with good id', async () => {
+
+    const notesCollection = new NotesCollection();
+
+    const noteData = { text: 'Generic note' };
+
+    const note = await notesCollection.create(noteData);
+
+    await notesCollection.delete(note._id);
+
+    const deletedNote = await notesCollection.get({ _id: note._id });
+
+    expect(deletedNote).not.toBeUndefined();
+
+  });
+
+  it('should handle deleting unknown id', async () => {
+
+    const notesCollection = new NotesCollection();
+
+    const result = await notesCollection.delete('unknown id');
+
+    expect(result).toBeFalsy();
 
   });
 
