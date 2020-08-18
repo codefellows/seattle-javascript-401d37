@@ -1,0 +1,4 @@
+.env
+node_modules
+# this is simple and silly
+# your real one will have a LOT more
