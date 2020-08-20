@@ -7,7 +7,7 @@ function getZip(req, res, next) {
   req.body.zip = Math.floor(Math.random() * 10000).toString().padStart(5, 0);
   next();
 }
-router.param('city', getZip);
+router.param('city', getZip); // triggered when :city is found in url (and reached)
 
 
 // That middleware will not run here

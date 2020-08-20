@@ -47,6 +47,7 @@ function handleGetAll(req, res, next) {
     .catch(next);
 }
 
+
 function handleGetOne(req, res, next) {
   let id = req.params.id;
   req.model.get(id)

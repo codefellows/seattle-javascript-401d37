@@ -6,9 +6,9 @@ const express = require('express');
 const errorHandler = require('../middleware/500.js');
 const notFoundHandler = require('../middleware/404.js');
 
-// Custom Routes
+// Custom Routes // DIFFERENT!!!!
 const apiRouter = require('../routes/v1.js');
-const paramsRouter = require('../routes/params.js');
+const paramsRouter = require('../routes/params.js'); // For reference/review NOT needed in lab
 
 const app = express();
 
