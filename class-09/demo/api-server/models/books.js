@@ -1,9 +1,9 @@
 'use strict';
 
-const teamSchema = require('./books-schema.js');
+const booksSchema = require('./books-schema.js');
 const dataModel = require('./model.js');
 
-class Teams extends dataModel { }
+class Books extends dataModel { }
 
 
-module.exports = new Teams(teamSchema);
+module.exports = new Books(teamSchema);
