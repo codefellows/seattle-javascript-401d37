@@ -22,3 +22,10 @@ Today, we'll be looking at ways to create an account and securely authenticate a
 ## Today's Outline
 
 <!-- To Be Completed By Instructor -->
+
+- Stacks & Queues Review / Prep
+- API Server wrap up
+- "Basic" Authentication
+  - Base64
+  - JSON Web Tokens
+- Auth Lab Prep 
