@@ -3,13 +3,14 @@
 require('@code-fellows/supergoose');
 const auth = require('../src/auth/middleware.js');
 const Users = require('../src/auth/users-model.js');
+process.env.SECRET = 'muysecreto';
 
 beforeAll(async (done) => {
   await new Users({username: 'admin', password: 'password', role: 'admin', email:'admin@admin.com'}).save();
   done();
 });
 
-describe.skip('Auth Middleware', () => {
+describe('Auth Middleware', () => {
 
   let errorObject = {'message': 'Invalid User ID/Password', 'status': 401, 'statusMessage': 'Unauthorized'};
 

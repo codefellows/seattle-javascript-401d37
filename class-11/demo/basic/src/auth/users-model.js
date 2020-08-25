@@ -44,8 +44,6 @@ users.methods.generateToken = function () {
 
   const signed = jwt.sign(tokenData, process.env.SECRET);
 
-  console.log('signed', signed);
-
   return signed;
 
 };
