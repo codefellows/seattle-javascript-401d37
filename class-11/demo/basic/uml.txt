@@ -1,0 +1,25 @@
+-----------------
+--   Sign up  ---
+-----------------
+Post
+Body:
+  username: string
+  password: string
+  email: string
+  etc.
+
+
+
+Responds with....
+
+???? Decide later ????
+status: 201
+
+
+-----------------
+--   Sign In  ---
+-----------------
+
+etc.
+
+

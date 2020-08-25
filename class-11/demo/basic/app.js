@@ -28,7 +28,7 @@ app.post('/signup', async (req, res) => {
     users[user.username] = user;
 
     // Create a signed "token"
-    let token = await jwt.sign({ username: user.username }, SECRET)
+    let token = await jwt.sign({ username: user.username }, SECRET);
 
     // Send it out
     res.status(200).send(token);
@@ -55,7 +55,7 @@ app.post('/signin', async (req, res) => {
 
   if (verified) {
     // Create a signed "token"
-    let token = jwt.sign({ username: user.username }, SECRET)
+    let token = jwt.sign({ username: user.username }, SECRET);
 
     // Send it out
     res.status(200).send(token);
