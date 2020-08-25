@@ -1,0 +1,44 @@
+{
+  "name": "auth-server-",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "nodemon app.js",
+    "test-watch": "jest --watchAll",
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shydlovska-401-advanced-javascript/auth-server-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shydlovska-401-advanced-javascript/auth-server-/issues",
+    "dependencies": {
+      "base-64": "^0.1.0",
+      "bcrypt": "^3.0.2",
+      "cors": "^2.8.4",
+      "@code-fellows/supergoose": "^1.0.11",
+      "dotenv": "^6.1.0",
+      "express": "^4.16.3",
+      "jest": "^24.8.0",
+      "jsonwebtoken": "^8.4.0",
+      "mongoose": "^5.3.13",
+      "morgan": "^1.9.0"
+    }
+  },
+  "homepage": "https://github.com/Shydlovska-401-advanced-javascript/auth-server-#readme",
+  "dependencies": {
+    "@code-fellows/supergoose": "^1.0.11",
+    "mongodb-memory-server": "^5.1.5",
+    "base-64": "^0.1.0",
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.0"
+  }
+}
