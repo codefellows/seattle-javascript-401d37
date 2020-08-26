@@ -15,7 +15,7 @@ let users = {
   user: { username: 'user', password: 'password', role: 'user' },
 };
 
-describe('Auth Router', () => {
+describe.skip('Auth Router', () => {
 
   Object.keys(users).forEach(userType => {
 

@@ -10,7 +10,7 @@ beforeAll(async () => {
   await User(adminUserData).save();
 });
 
-describe('user authentication', () => {
+describe.skip('user authentication', () => {
 
   let errorObject = { 'message': 'Invalid User ID/Password', 'status': 401, 'statusMessage': 'Unauthorized' };
 

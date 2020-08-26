@@ -24,11 +24,17 @@ it('should save hashed password', async () => {
 
 it('should authenticate known user', async () => {
   await new User(fakeUser).save();
-  const authenticatedUser = User.authenticateBasic(fakeUser.username, fakeUser.password );
+  const authenticatedUser = await User.authenticateBasic(fakeUser.username, fakeUser.password );
   expect(authenticatedUser).toBeDefined();
 });
 
-it('should get null for  unknown user', async () => {
+it('should get null for unknown user when none', async () => {
+  const authenticatedUser = await User.authenticateBasic('nobody', 'unknown' );
+  expect(authenticatedUser).toBeNull();
+});
+
+it('should get null for  unknown user when there are others', async () => {
+  await new User(fakeUser).save();
   const authenticatedUser = await User.authenticateBasic('nobody', 'unknown' );
   expect(authenticatedUser).toBeNull();
 });
@@ -64,7 +70,7 @@ it('creating an existing user returns user', async () => {
 
 });
 
-it('creating with email returns new user', async () => {
+it('creating with email returns new user if not present', async () => {
 
   const foundOrCreated = await User.createFromOauth('new@new.com');
 
@@ -72,12 +78,14 @@ it('creating with email returns new user', async () => {
 
   expect(foundOrCreated.password).not.toBe('none');
 
+  expect(foundOrCreated.username).toBe('new@new.com');
+
 });
 
-it('creating with missing email is an error', async () => {
+it('creating with null email argument is an error', async () => {
 
   expect.assertions(1);
 
-  await expect(User.createFromOauth()).rejects.toEqual('Validation Error');
+  await expect(User.createFromOauth(null)).rejects.toEqual('Validation Error');
 
 });
