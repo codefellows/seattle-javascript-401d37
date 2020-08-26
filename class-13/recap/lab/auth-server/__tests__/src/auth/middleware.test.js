@@ -5,12 +5,16 @@ require('@code-fellows/supergoose');
 const auth = require('../../../src/auth/basic-auth-middleware.js');
 const User = require('../../../src/auth/users-model.js');
 
-beforeAll(async () => {
+beforeEach(async () => {
   const adminUserData = { username: 'admin', password: 'password', role: 'admin', email: 'ad@min.com' };
   await User(adminUserData).save();
 });
 
-describe.skip('user authentication', () => {
+afterEach(async () => {
+  await User.deleteMany({});
+});
+
+describe('user authentication', () => {
 
   let errorObject = { 'message': 'Invalid User ID/Password', 'status': 401, 'statusMessage': 'Unauthorized' };
 

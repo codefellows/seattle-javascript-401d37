@@ -4,7 +4,9 @@ require('dotenv').config();
 
 const jwt = require('jsonwebtoken');
 
+// const { server } = require('../../../src/app.js');
 const server = require('../../../src/app.js').server;
+
 const supergoose = require('@code-fellows/supergoose');
 
 const mockRequest = supergoose(server);
@@ -15,7 +17,7 @@ let users = {
   user: { username: 'user', password: 'password', role: 'user' },
 };
 
-describe.skip('Auth Router', () => {
+describe('Auth Router', () => {
 
   Object.keys(users).forEach(userType => {
 
@@ -27,11 +29,13 @@ describe.skip('Auth Router', () => {
 
         const results = await mockRequest.post('/signup').send(users[userType]);
 
+        expect(results.body.user).toBeDefined();
+
+        expect(results.body.token).toBeDefined();
+
         const token = jwt.verify(results.body.token, process.env.JWT_SECRET);
 
-        id = token.id;
-
-        expect(token.id).toBeDefined();
+        expect(token.role).toBe(userType);
 
       });
 
