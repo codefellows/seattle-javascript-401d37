@@ -23,8 +23,6 @@ describe('Auth Router', () => {
 
     describe(`${userType} users`, () => {
 
-      let id;
-
       it('can create one', async () => {
 
         const results = await mockRequest.post('/signup').send(users[userType]);
@@ -48,8 +46,6 @@ describe('Auth Router', () => {
           .post('/signin').auth(username, password);
 
         const token = jwt.verify(results.body.token, process.env.JWT_SECRET);
-
-        expect(token.id).toEqual(id);
 
         expect(token.role).toBe(userType);
 
