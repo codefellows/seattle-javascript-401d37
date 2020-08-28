@@ -4,34 +4,39 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const SECRET = process.env.JWT_SECRET;
+const SECRET = process.env.SECRET || 'supersecret';
 
+/* Additional Security Measures */
+const SINGLE_USE_TOKENS = false;// !!process.env.SINGLE_USE_TOKENS;
+const TOKEN_EXPIRE = process.env.TOKEN_EXPIRE || '60m';
+const usedTokens = new Set();
+
+/* Lab 14 TODO
+   Add capabilities field
+   See todo-users-model.js for tips
+*/
 const users = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  fullname: { type: String },
   email: { type: String },
-  role: { type: String, default: 'user', enum: ['admin', 'editor', 'user'] },
+  role: { type: String, default: 'user', enum: ['admin', 'editor', 'writer', 'user'] },
+  capabilities: { type: Array, required: true, default: [] },
 });
 
 users.pre('save', async function () {
+
   if (this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, 10);
   }
+
+  /* Lab 14 TODO
+   assign capabilities based on role
+   See todo-users-model.js for tips
+   */
+
 });
 
-users.statics.authenticateBasic = async function (username, password) {
-  const user = await this.findOne({ username });
-
-  return user && await user.comparePassword(password);
-
-};
-
-users.methods.comparePassword = async function (password) {
-  const passwordMatch = await bcrypt.compare(password, this.password);
-  return passwordMatch ? this : null;
-};
-
-/* Lab 13 : Note - changed from email to username */
 users.statics.createFromOauth = function (username) {
 
   if (!username) { return Promise.reject('Validation Error'); }
@@ -50,53 +55,58 @@ users.statics.createFromOauth = function (username) {
 
 };
 
+users.statics.authenticateToken = function (token) {
 
+  /* Additional Security Measure */
+  if (usedTokens.has(token)) {
+    return Promise.reject('Invalid Token');
+  }
 
-/* Lab 13 - Modified Method */
-// You might handle this differently BUT tests assume this style
-// AND provided OAUTH example assumes it
+  try {
 
-users.methods.generateToken = function () {
+    let parsedToken = jwt.verify(token, SECRET);
 
+    /* Additional Security Measure */
+    (SINGLE_USE_TOKENS) && parsedToken.type !== 'key' && usedTokens.add(token);
+
+    let query = { _id: parsedToken.id };
+    return this.findOne(query);
+  } catch (e) { throw new Error('Invalid Token'); }
+
+};
+
+users.statics.authenticateBasic = function (username, password) {
+  let query = { username };
+  return this.findOne(query)
+    .then(user => user && user.comparePassword(password))
+    .catch(error => { throw error; });
+};
+
+users.methods.comparePassword = function (password) {
+  return bcrypt.compare(password, this.password)
+    .then(valid => valid ? this : null);
+};
+
+users.methods.generateToken = function (type) {
+
+  /* Lab 14 TODO - add capabilities */
   let token = {
     id: this._id,
     role: this.role,
   };
 
+  /* Additional Security Measure */
   let options = {};
-
-  // /* Additional Security Measure */
-  // if (!!TOKEN_EXPIRE) {
-  //   options = { expiresIn: TOKEN_EXPIRE };
-  // }
+  if (type !== 'key' && !!TOKEN_EXPIRE) {
+    options = { expiresIn: TOKEN_EXPIRE };
+  }
 
   return jwt.sign(token, SECRET, options);
 };
 
-/* Lab 13 new methods start */
 
-
-users.statics.authenticateToken = function (token) {
-
-  /* Additional Security Measure */
-  // if (usedTokens.has(token)) {
-  //   return Promise.reject('Invalid Token');
-  // }
-
-  let parsedToken = jwt.verify(token, SECRET);
-
-  /* Additional Security Measure */
-  // Add to the scrap heap if we are in "one use token mode"
-  // if(SINGLE_USE_TOKENS) {
-  //   usedTokens.add(token);
-  // }
-
-  return this.findById(parsedToken.id);
-
+users.methods.generateKey = function () {
+  return this.generateToken('key');
 };
-
-
-/* Lab 13 end */
-
 
 module.exports = mongoose.model('users', users);

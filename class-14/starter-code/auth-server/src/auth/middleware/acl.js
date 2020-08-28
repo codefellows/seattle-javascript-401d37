@@ -1,6 +1,9 @@
 'use strict';
 
-/* Lab 14 - Middleware to protect routes based on capabilities */
+/* Lab 14 TODO
+   Middleware to protect routes based on capabilities
+   Make sure this is used where needed
+*/
 
 // Notice the curried middleware...we take the desired capability from the route
 // and return a middleware function that's aware of it.
