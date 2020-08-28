@@ -21,14 +21,12 @@ module.exports = async (req, res, next) => {
 
     req.user = validUser;
 
-    /* Lab 14 - add capabilities key/value pair
-       Refer to todo-bearer-auth.js for tips
-    */
+    /* Lab 14 - add capabilities key/value pair */
     req.user = {
       username: validUser.username,
       fullname: validUser.fullname,
       email: validUser.email,
-      capabilities: ['REPLACE THIS ARRAY'],
+      capabilities: validUser.capabilities,
     };
 
     next();
