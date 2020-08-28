@@ -69,6 +69,7 @@ async function getRemoteUserInfo(token) {
 async function getUser(remoteUser) {
 
   let user =  await User.createFromOauth(remoteUser.login);
+
   let token = user.generateToken();
 
   return [user, token];
