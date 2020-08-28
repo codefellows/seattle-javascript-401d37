@@ -75,27 +75,26 @@ users.methods.generateToken = function () {
 
 /* Lab 13 new methods start */
 
-users.statics.authenticateToken = async function (token) {
 
-  /*
- DONE Use the JWT library to validate it with the secret
-  ??? If it's valid look up the user by the id in the token and return it
-DONE Otherwise, return an error
-*/
+users.statics.authenticateToken = function (token) {
 
+  /* Additional Security Measure */
+  // if (usedTokens.has(token)) {
+  //   return Promise.reject('Invalid Token');
+  // }
 
-  let tokenObject = jwt.verify(token, SECRET);
+  let parsedToken = jwt.verify(token, SECRET);
 
-  const foundUser = await users.findById(tokenObject.id);
+  /* Additional Security Measure */
+  // Add to the scrap heap if we are in "one use token mode"
+  // if(SINGLE_USE_TOKENS) {
+  //   usedTokens.add(token);
+  // }
 
-  if (foundUser) {
-    return foundUser;
-  } else {
-    // user not found error
-    throw new Error('User Not Found');
-  }
+  return this.findById(parsedToken.id);
 
 };
+
 
 /* Lab 13 end */
 
