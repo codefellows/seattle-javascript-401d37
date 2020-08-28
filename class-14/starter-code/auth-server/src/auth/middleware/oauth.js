@@ -65,7 +65,7 @@ async function getRemoteUserInfo(token) {
 
 }
 
-/* Lab 13 - using login vs. email */
+/* using login vs. email */
 async function getUser(remoteUser) {
 
   let user =  await User.createFromOauth(remoteUser.login);

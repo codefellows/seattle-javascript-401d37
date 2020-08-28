@@ -1,5 +1,10 @@
 'use strict';
 
+/* Lab 14 TODO
+  Search this project for TODO items
+  make them TODONE
+*/
+
 // 3rd Party Resources
 const express = require('express');
 const cors = require('cors');
@@ -9,7 +14,7 @@ const morgan = require('morgan');
 const errorHandler = require('./middleware/error.js');
 const notFound = require('./middleware/404.js');
 const authRouter = require('./auth/router.js');
-const extraRouter = require('./extra-routes.js'); /* Lab 13 */
+const extraRouter = require('./extra-routes.js');
 
 // Prepare the express app
 const app = express();
@@ -24,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use(authRouter);
-app.use(extraRouter); /* Lab 13 */
+app.use(extraRouter);
 
 // Catchalls
 app.use(notFound);

@@ -1,7 +1,5 @@
 'use strict';
 
-/* Lab 13 */
-
 const User = require('../users-model');
 
 module.exports = async (req, res, next) => {
