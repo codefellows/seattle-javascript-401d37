@@ -59,7 +59,8 @@ users.statics.createFromOauth = function (username) {
     .catch(error => {
       console.log('Creating new user');
       let password = 'phoneybaloney';
-      return this.create({ username, password });
+      let role = 'user'; // NOTE: change this role to test out different routes
+      return this.create({ username, password, role });
     });
 
 };
