@@ -35,6 +35,8 @@ The lab will still be published in Canvas with the old instructions. This is so 
 
 **NOTE** you want to avoid old user records from previous labs messing things up. So either a) use a new database. E.g. auth-server-acl or b) clear out your existing database.
 
+No unit tests required.
+
 Reach out with any questions.
 
 ## Notes
