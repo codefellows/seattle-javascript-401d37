@@ -13,7 +13,7 @@ Then use Postman (or httpie) to manually test the following routes
 - /public
   - anyone can get in
 - /private 
-  - only validate users get in
+  - only validated users get in
 - /readonly 
   - user must have 'read' capabilities
   - aka be a 'user' role or above
