@@ -26,10 +26,15 @@ users.pre('save', async function () {
     this.password = await bcrypt.hash(this.password, 10);
   }
 
+  let role = this.role; // tweak as needed when testing
+
+  // DANGER: REMOVE from live system
+  // role = 'admin';
+
   /* Lab 14 - assign capabilities */
   if(this.isModified('role')) {
 
-    switch (this.role) {
+    switch (role) {
     case 'admin':
       this.capabilities = ['create', 'read', 'update', 'delete'];
       break;
