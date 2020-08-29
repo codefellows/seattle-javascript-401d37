@@ -21,7 +21,6 @@ const users = new mongoose.Schema({
   fullname: { type: String },
   email: { type: String },
   role: { type: String, default: 'user', enum: ['admin', 'editor', 'writer', 'user'] },
-  capabilities: { type: Array, required: true, default: [] },
 });
 
 users.pre('save', async function () {
