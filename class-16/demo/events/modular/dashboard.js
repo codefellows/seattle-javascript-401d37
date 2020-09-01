@@ -10,3 +10,6 @@ events.on('save', handleSave);
 function handleSave(payload) {
   console.log(`Record ${payload.id} was saved`);
 }
+
+
+// events.on('potato-fried', friedPotatoHandler);

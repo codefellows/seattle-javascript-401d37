@@ -46,7 +46,7 @@ describe('handle pick up event', () => {
 
     expect(deliveredHandler).toHaveBeenCalledTimes(0);
 
-    jest.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(3000);
 
     expect(deliveredHandler).toHaveBeenCalledTimes(1);
 
