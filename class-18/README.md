@@ -22,6 +22,7 @@ Doing TCP Sockets by hand gets tiresome. Socket.io makes it way easier, and it w
 <!-- To Be Completed By Instructor -->
 - Tree: Breadth First Search
 - Bug Hunting / Q & A
+  - Doc words vs output image 
 - Test Bed Tool
 - tricks of the trade
   - module.parent
