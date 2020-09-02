@@ -10,10 +10,10 @@ const emergency = io.connect('http://localhost:3000/emergency');
 const weather = io.connect('http://localhost:3000/weather');
 
 // No namespace, this goes to every client
-socket.emit('sunrise');
+socket.emit('sunrise',{review:'lovely deep purple'});
 
-emergency.emit('crime', 'Break-In on 100th Avenue');
 emergency.emit('fire', 'Fishing boat on fire on Dock 74');
+emergency.emit('accident', 'Skater with broken ankle');
 
 weather.emit('rain');
 weather.emit('snow');

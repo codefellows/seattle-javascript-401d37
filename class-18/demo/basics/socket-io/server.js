@@ -3,18 +3,26 @@
 const io = require('socket.io')(process.env.PORT || 3000);
 
 io.on('connection', (socket) => {
-  console.log('CONNECTED', socket.id);
 
-  socket.on('sunrise', (payload) => {
-    console.log('received sunrise message', payload);
-    io.emit('sunrise', payload);
-  });
+  // alternate DRY version of event listener "registration" covered in circla back
+  const events = ['sunrise', 'sunset'];
 
-  socket.on('sunset', (payload) => {
-    io.emit('sunset', payload);
-  });
+  for(let eventName of events) {
+    registerEvent(socket, eventName);
+  }
 
 });
+
+function registerEvent(socket, eventName) {
+  socket.on(eventName, (payload) => {
+    logIt(eventName, payload);
+    io.emit(eventName, payload);
+  });
+}
+
+function logIt(eventName, payload) {
+  console.log(eventName, payload.review);
+}
 
 // Build this second -- it showcases namespaces
 // Couple this with the weather.js client
@@ -58,4 +66,4 @@ emergency.on('connection', (socket) => {
   });
 
 });
-*/
+//*/
