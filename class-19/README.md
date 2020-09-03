@@ -28,6 +28,8 @@ To this point, we've built servers based on internal event processing, generical
   - Assignment Runner 
   - `module.parent`
   - `__mocks__` folder
+  - Refactoring vs. "from scratch"
+  - Danger of "Magic strings"
 - Queueing Things Up Discussion/Demo
 - Lab Prep
 - Holiday reminder
