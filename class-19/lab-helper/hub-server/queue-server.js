@@ -31,7 +31,9 @@ io.on('connection', (socket) => {
         io.in(clientID).emit(event, { messageID, payload });
       }
     }
-    catch (e) { }
+    catch (e) {
+      console.error(e);
+    }
   });
 
   socket.on('subscribe', payload => {

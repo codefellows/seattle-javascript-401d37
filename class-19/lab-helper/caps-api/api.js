@@ -2,47 +2,42 @@
 
 const express = require('express');
 const cors = require('cors');
-const faker = require('faker');
-
-const Queue = require('./lib/queue');
-const queue = new Queue('api');
-
 const app = express();
+const faker = require('faker');
+const io = require('socket.io-client');
+
 
 app.use(express.json());
+
 app.use(express.urlencoded({extended:true}));
+
 app.use(cors());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
-app.post('/delivery/:store/:code', (req, res) => {
+const socket = io.connect('http://localhost:3000/caps');
 
-  if (!(req.params.store && req.params.code)) { throw 'Invalid Delivery Params'; }
+app.post('/pickup', (request, response) => {
 
-  const message = {
-    store: req.params.store,
-    code: req.params.code,
-  };
 
-  queue.trigger('delivered', message);
-
-  console.log('triggered', message);
-
-  res.status(200).send(`${req.params.store} - ${req.params.code} Delivered ${new Date().toUTCString()}`);
-});
-
-app.post('/pickup', (req, res) => {
-
-  let delivery = req.body || {
+  let defaultDelivery = {
     store: '1-206-flowers',
     orderID: faker.random.uuid(),
-    customer: req.body.customer,
-    address: req.body.address,
+    customer: faker.name.findName(),
+    address: faker.address.streetAddress(),
   };
 
-  queue.trigger('pickup', delivery);
-  res.status(200).send('scheduled');
+  let delivery = request.body;
+
+  if(Object.keys(delivery).length === 0) {
+    delivery = defaultDelivery;
+  }
+
+  socket.emit('pickup', delivery);
+
+  response.status(200).send(JSON.stringify(delivery));
+
 
 });
 
-app.listen(PORT, console.log(`API Server @ ${PORT}`));
+app.listen(PORT, () => console.log('Listening on PORT', PORT));
