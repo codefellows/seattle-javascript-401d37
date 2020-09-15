@@ -1,4 +1,5 @@
 import React from 'react';
+import JSONPretty from 'react-json-pretty';
 
 import Form from './form.js';
 import People from './people.js';
@@ -27,6 +28,7 @@ class App extends React.Component {
       <>
         <Form prompt="Get some Star Wars Folks..." toggleLoading={this.toggleLoading} handler={this.handleForm} />
         <People loading={this.state.loading} people={this.state.results} count={this.state.count} />
+        <JSONPretty data={this.state}></JSONPretty>
       </>
     );
   }
