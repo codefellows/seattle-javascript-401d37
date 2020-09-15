@@ -8,8 +8,13 @@ class Form extends React.Component {
 
     this.props.toggleLoading();
 
+
+    // fetch the data...
+
     let raw = await fetch('https://swapi.dev/api/people/');
     let data = await raw.json();
+
+    // fetch done
 
     let count = data.count;
 

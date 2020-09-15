@@ -26,7 +26,7 @@ class App extends React.Component {
     return (
       <>
         <Form prompt="Get some Star Wars Folks..." toggleLoading={this.toggleLoading} handler={this.handleForm} />
-        <People loading={this.state.loading} people={this.state.results} />
+        <People loading={this.state.loading} people={this.state.results} count={this.state.count} />
       </>
     );
   }

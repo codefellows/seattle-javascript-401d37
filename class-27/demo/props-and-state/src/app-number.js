@@ -3,47 +3,43 @@ import React from 'react';
 import './styles.scss';
 
 class App extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      number: 0,
-    };
+      num: 0,
+    }
   }
 
-  handleNewNumber = (number) => {
-    this.setState({ number });
-  };
+  numChangeHandler = num => {
+    this.setState({ num });
+  }
 
   render() {
     return (
       <>
-        <Number show={this.state.number} />
-        <NumberForm updateNumber={this.handleNewNumber} />
+        <h1>Number Fun</h1>
+        <Number num={this.state.num} otherProp="otherThing" />
+        <h3>Playing around {this.state.num}</h3>
+        <NumberForm onNumChange={this.numChangeHandler} />
       </>
     );
   }
 }
 
 function Number(props) {
-  return (
-    <h1 data-testid="output">{props.show}</h1>
-  )
+  return <h2 data-testid="output">Number here: {props.num}</h2>
 }
 
 function NumberForm(props) {
 
-  const _handleSubmit = (e) => {
-    e.preventDefault();
-    e.target.reset();
-  }
-
-  const _handleChange = (e) => {
-    props.updateNumber(e.target.value);
+  function changeHandler(event) {
+    props.onNumChange(event.target.value);
   }
 
   return (
-    <form onSubmit={_handleSubmit}>
-      <input data-testid="num" type="number" onChange={_handleChange} placeholder="0" />
+    <form>
+      <input data-testid="num" type="number" placeholder="0" onChange={changeHandler} />
     </form>
   )
 }
