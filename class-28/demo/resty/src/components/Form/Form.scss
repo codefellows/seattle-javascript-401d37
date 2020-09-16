@@ -1,0 +1,22 @@
+$bg-color: goldenrod;
+
+.Form {
+    padding: 1em;
+    background-color: $bg-color;
+
+
+    input {
+        width: 50%;
+        margin-left: .5em;
+    }
+    section {
+        border: 2px solid orangered;
+        margin: 2em;
+        border-radius: 10px;
+        background-color: gainsboro;
+    }
+
+    button {
+        margin: .35em;
+    }
+}
