@@ -1,88 +1,73 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-
-
 import './todo.scss';
 
-function ToDo() {
+class ToDo extends React.Component {
 
-  const [list, setList] = useState([])
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: [],
+    };
+  }
 
-  const addItem = (item) => {
+  addItem = (item) => {
     item._id = Math.random();
     item.complete = false;
-    setList([...list, item]);
+    this.setState({ list: [...this.state.list, item]});
   };
 
-  const toggleComplete = id => {
+  toggleComplete = id => {
 
-    let item = list.filter(i => i._id === id)[0] || {};
+    let item = this.state.list.filter(i => i._id === id)[0] || {};
 
     if (item._id) {
       item.complete = !item.complete;
-      let updatedList = list.map(listItem => listItem._id === item._id ? item : listItem);
-      setList(updatedList);
+      let list = this.state.list.map(listItem => listItem._id === item._id ? item : listItem);
+      this.setState({list});
     }
 
   };
 
-  useEffect(() => {
-    let updatedList = [
-      { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A' },
-      { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A' },
-      { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B' },
-      { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C' },
-      { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B' },
+  componentDidMount() {
+    let list = [
+      { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A'},
+      { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A'},
+      { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B'},
+      { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C'},
+      { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B'},
     ];
 
-    setList(updatedList);
-  }, []);
+    this.setState({list});
+  }
 
-  return (
-    <Container>
-      <Row>
-        <Col>
+  render() {
+    return (
+      <>
         <header>
-          <Navbar>
-            <Nav bg="dark">
           <h2>
-            ToDo List Manager ({list.length})
+          There are {this.state.list.filter(item => !item.complete).length} Items To Complete
           </h2>
-
-            </Nav>
-          </Navbar>
         </header>
-        </Col>
-        </Row>
-        <Row>
-          <Col>
 
         <section className="todo">
 
           <div>
-            <TodoForm handleSubmit={addItem} />
+            <TodoForm handleSubmit={this.addItem} />
           </div>
 
           <div>
             <TodoList
-              list={list}
-              handleComplete={toggleComplete}
-              />
+              list={this.state.list}
+              handleComplete={this.toggleComplete}
+            />
           </div>
         </section>
-              </Col>
-
-      </Row>
-    </Container>
-  );
+      </>
+    );
+  }
 }
-
 
 export default ToDo;

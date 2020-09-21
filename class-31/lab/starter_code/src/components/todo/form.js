@@ -1,5 +1,4 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card'
 
 class TodoForm extends React.Component {
 
@@ -21,7 +20,7 @@ class TodoForm extends React.Component {
 
   render() {
     return (
-      <Card>
+      <>
         <h3>Add Item</h3>
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -42,7 +41,7 @@ class TodoForm extends React.Component {
           </label>
           <button>Add Item</button>
         </form>
-      </Card>
+      </>
     );
   }
 }
