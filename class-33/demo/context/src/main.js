@@ -4,7 +4,6 @@ import SiteEditor from './components/site.js';
 import ThemeEditor from './components/theme.js';
 import ContentClass from './components/content-class.js';
 import ContentFunction from './components/content-function.js';
-import PotatoStatus from './components/potato-status.js';
 import { ThemeContext } from './context/theme.js';
 
 const styles = {
@@ -31,7 +30,6 @@ class Main extends React.Component {
           <aside>
             <SiteEditor />
             <ThemeEditor />
-            <PotatoStatus />
           </aside>
         </section>
       </main>
