@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 let initialState = {
   candidates: [
     { name: 'Mary', votes: 0 },
@@ -7,49 +8,59 @@ let initialState = {
   totalVotes: 0,
 };
 
+
 export default (state = initialState, action) => {
+
+  console.log('reducer');
   let { type, payload } = action;
+  console.log('type', type, 'payload', payload);
 
   switch (type) {
-    case 'INCREMENT':
+  case 'INCREMENT':
 
-      let totalVotes = state.totalVotes + 1;
-      let candidates = state.candidates.map(candidate => {
-        if (candidate.name === payload) {
-          // Why return a new object here instead of just updating in place?
-          // Hint: pass by ...
-          return { name: candidate.name, votes: candidate.votes + 1 }
-        }
-        return candidate;
-      });
+    let totalVotes = state.totalVotes + 1;
+    let candidates = state.candidates.map(candidate => {
+      if (candidate.name === payload) {
+        // Why return a new object here instead of just updating in place?
+        // Hint: pass by ...
+        return { name: candidate.name, votes: candidate.votes + 1 }
+      }
+      return candidate;
+    });
 
-      console.log('i', initialState);
+    // Or you can do this the shredder way ... which you'll often see in live code bases
+    // let candidates = state.candidates.map(candidate => candidate.name == payload ? { ...candidate, votes: candidate.votes + 1 } : candidate);
 
-      // Or you can do this the shredder way ... which you'll often see in live code bases
-      // let candidates = state.candidates.map(candidate => candidate.name == payload ? { ...candidate, votes: candidate.votes + 1 } : candidate);
+    return { totalVotes, candidates };
 
-      return { totalVotes, candidates };
+  case 'RESET':
+    console.log(initialState);
+    return initialState;
 
-    case 'RESET':
-      console.log(initialState);
-      return initialState;
-
-    default:
-      return state;
+  default:
+    return state;
   }
 };
 
+
+
+
+
+// An "action" is a function that returns an object with a particular shape
+// { type: string, payload: ?}
+
+// actions - these functions are the ONLY way to modify the state
 export const increment = (name) => {
   return {
     type: 'INCREMENT',
-    payload: name
+    payload: name,
   };
 };
 
 export const decrement = (name) => {
   return {
     type: 'DECREMENT',
-    payload: name
+    payload: name,
   };
 };
 
