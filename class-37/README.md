@@ -20,6 +20,13 @@ Redux excels at not only global state, but complex global state. Today, we'll be
 
 <!-- To Be Completed By Instructor -->
 
+- Fix Me Challenge
+- Challenge Questions / Preview
+- Whiteboard day preferences
+  - You can even go Friday!
+- Combining Reducers
+- Getting solid on Redux 
+
 ## Notes
 
 ### Combined Reducers
