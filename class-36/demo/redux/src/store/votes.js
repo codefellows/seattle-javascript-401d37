@@ -11,9 +11,7 @@ let initialState = {
 
 export default (state = initialState, action) => {
 
-  console.log('reducer');
   let { type, payload } = action;
-  console.log('type', type, 'payload', payload);
 
   switch (type) {
   case 'INCREMENT':
@@ -34,7 +32,6 @@ export default (state = initialState, action) => {
     return { totalVotes, candidates };
 
   case 'RESET':
-    console.log(initialState);
     return initialState;
 
   default:
