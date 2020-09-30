@@ -21,6 +21,7 @@ Connecting a Redux application to a backend service (i.e. an API) requires a bit
 <!-- To Be Completed By Instructor -->
 - TA mess up yesterday
 - Change of plans for Thursday
+- Code blindness strategies
 - Graphs
   - Direct Flight Review
   - DFS preview
