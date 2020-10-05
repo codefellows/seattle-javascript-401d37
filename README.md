@@ -118,7 +118,7 @@ It's advisable that students first make an new organization in Github (perhaps c
 | Module 6 (Project: RESTy)                         | Module 7 (Project: TO DO, Bootstrap)             | Module 8 (Project: e-Commerce, Material UI)   | Module 9 (Project: Personal Projects)       |
 | [26: React Basics](./class-26/README.md)          | [31: Hooks API](./class-31/README.md)            | [36: Redux](./class-36/README.md)             | [41: React Native](./class-40/README.md)    |
 | [27: Testing & Deployment](./class-27/README.md)  | [32: Custom Hooks](./class-32/README.md)         | [37: Combined Reducers](./class-37/README.md) | [42: React Native](./class-41/README.md)    |
-| [28: Props & State](./class-28/README.md)         | [33: Context API](./class-33/README.md)          | [38: Async Actions](./class-38/README.md)     | [43: UI Frameworks](./class-42/README.md)   |
+| [28: Props & State](./class-28/README.md)         | [33: Context API](./class-33/README.md)          | [38: Async Actions](./class-38/README.md)     | [43: Ethics in Tech](./class-43/README.md)   |
 | [29: Routing & Composition](./class-29/README.md) | [34: Login/Auth](./class-34/README.md)           | [39: Redux Toolkit](./class-39/README.md)     | 44: Open Source Contributions .             |
 | 30: Career Coaching, DS&A                         | 35: Career Coaching, DS&A                        | 40: Career Coaching, DS&A                     | 45: Project Preparation                     |
 | Module 20: Final Projects                         |                                                  |                                               |                                             |
