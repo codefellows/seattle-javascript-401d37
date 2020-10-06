@@ -1,22 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
-import { getSomething } from './store/'
+import { doSomething } from './store/index.js';
 
 
-function App(props) {
+function App({doSomething, message}) {
+
+  useEffect(() => {
+    doSomething();
+  }, [doSomething])
+
+
   return (
     <div className="App">
-      {props.loading ?
-        <p>Loading...</p>
-      :
-        <h1>{props.value}</h1>
-      }
-       <>
-
-        <button onClick={props.getSomething}>Immediate</button>
-        <button onClick={() => props.getSomething('async')}>Delayed</button>
-        </>
+      <h1>{message}</h1>
     </div>
   );
 }
@@ -24,15 +21,13 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
-    value: state.doSomethingReducer.value,
-    loading: state.loadingReducer,
+    message: state.fetcher
   }
 }
 
-
-const mapDispatchToProps = {
-  getSomething,
-}
+const mapDispatchToProps = { doSomething }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+

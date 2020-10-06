@@ -67,7 +67,7 @@ it('[Arendelle, New Monstropolis, Naboo]	True, $115', () => {
 
 });
 
-it('[Naboo, Pandora]	False, $0', () => {
+it.skip('[Naboo, Pandora]	False, $0', () => {
 
   const graph = new Graph();
 
@@ -86,7 +86,7 @@ it('[Naboo, Pandora]	False, $0', () => {
 });
 
 
-it('[Narnia, Arendelle, Naboo]	False, $0', () => {
+it.skip('[Narnia, Arendelle, Naboo]	False, $0', () => {
 
   const graph = new Graph();
 

@@ -5,32 +5,44 @@ import axios from 'axios';
 // This dependency enables the Redux Dev Tools in your Chrome Console.
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const doNothingReducer = (state = { value: 'nothing' }, action) => {
-  return state;
-};
 
-const doSomethingReducer = (state = { value: 'nothing' }, action) => {
+function fetchReducer(state="I fetched nothing", action) {
 
-  if (action.type === 'GET_SOMETHING') {
-    return { ...state, value: action.payload };
+  const {type, payload} = action;
+
+  switch(type) {
+
+    case 'DO_SOMETHING':
+      return 'I fetched: ' + payload;
+
+    default:
+      return state;
   }
 
-  return state;
 }
 
-const loadingReducer = (state = false, action) => {
+// action creator
 
-  if (action.type === 'LOADING') {
-    return action.payload === true;
+export function doSomethingSync() {
+  return {
+    type: 'DO_SOMETHING',
+    payload: 'Immediate Luke Skywalker'
   }
+}
+export function doSomething() {
 
-  return state;
+  return async function(dispatch) {
+
+    const response = await axios.get('https://swapi.dev/api/people/1/');
+
+    dispatch({
+          type: 'DO_SOMETHING',
+          payload: response.data.name,
+    })
+  }
 }
 
-const loading = (bool) => ({ type: 'LOADING', payload: bool })
-
-
-let reducers = combineReducers({ doNothingReducer, doSomethingReducer, loadingReducer });
+let reducers = combineReducers({ fetcher: fetchReducer });
 
 const store = () => {
   return createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
@@ -39,33 +51,9 @@ const store = () => {
 export default store();
 
 
-export const getSomething = (flavor = 'sync') => {
-
-  switch (flavor) {
-    case 'async':
-
-      return async function (dispatch) {
-
-        dispatch(loading(true));
-
-        // const response = await later(1000, { data: { name: 'James Brown' } });
-
-        const response = await axios.get('https://swapi.dev/api/people/1');
-
-        dispatch(loading(false));
-
-        dispatch({ type: 'GET_SOMETHING', payload: response.data.name })
-      }
-
-    default:
-      return {
-        type: 'GET_SOMETHING',
-        payload: 'thing I got immediately'
-      }
-  }
-}
-
 // little utility to delay something by some milliseconds
 function later(delay, value) {
   return new Promise(resolve => setTimeout(resolve, delay, value));
 }
+
+

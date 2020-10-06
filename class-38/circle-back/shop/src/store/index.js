@@ -5,8 +5,9 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import categoryReducer from './category-reducer.js';
+import productReducer from './product-reducer.js';
 
-let reducers = combineReducers({ categoryReducer });
+let reducers = combineReducers({ categoryReducer, productReducer });
 
 const store = () => {
   return createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
